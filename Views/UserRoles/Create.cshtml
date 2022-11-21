@@ -1,0 +1,28 @@
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject RoleManager<IdentityRole> RoleManager
+
+@{
+    ViewData["Title"] = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Create User Role</h2>
+        </div>
+        <div class="card-body">
+        <p>
+            @Html.TextBox("RoleName")
+        </p>
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Create" class="btn btn-primary"
+                   style="width:auto"/>
+            <a asp-action="Index" asp-route-id="@ViewBag.userId"
+               class="btn btn-primary" style="width:auto">
+                Cancel
+            </a>
+        </div>
+    </div>
+</form>

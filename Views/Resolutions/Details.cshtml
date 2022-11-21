@@ -1,0 +1,101 @@
+@model Assignment1_v3.Models.Resolution
+@using Microsoft.AspNetCore.Identity
+@using Assignment1_v3.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Resolution</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ResolutionAbstract)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ResolutionAbstract)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+    </dl>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model?.ResolutionId">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+    </br>
+    </br>
+    </br>
+    </br>
+    <table class="table">
+        <thead>
+            <h4>Feedbacks</h4>
+            <tr>
+                <th>
+                    Link
+                </th>
+                <th>
+                    Result
+                </th>
+                <th>
+                    User
+                </th>
+                <th>
+                    User Signature GUID
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <p>
+                <a asp-controller="Feedbacks" asp-action="Create" asp-route-resolutionId="@Model.ResolutionId">Create
+                    New Feedback</a>
+            </p>
+            @foreach (var item in Model!.Feedbacks!)
+            {
+                <tr>
+                    <td>
+                        @item.Link
+                    </td>
+                    <td>
+                        @item.Message
+                    </td>
+                    <td>
+                        @item.ApplicationUser.FullName
+                    </td>
+                    <td>
+                        @item.ApplicationUser.SignatureGUID
+                    </td>
+                    @if (User != null && SignInManager.IsSignedIn(User))
+                    {
+                        @if (UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "Admin").Result)
+                        {
+                            <td>
+                                <a asp-controller="Feedbacks" asp-action="Delete" asp-route-id="@item.FeedbackId">Delete</a>
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

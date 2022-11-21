@@ -1,0 +1,54 @@
+@model IEnumerable<Assignment1_v3.Models.Resolution>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Resolutions</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResolutionAbstract)
+            </th>
+            <th>
+                @Html.ActionLink(Html.DisplayNameFor(model => model.Status), "Index", new { sortOrder =
+                ViewBag.StatusSortParm })
+            </th>
+            <th>
+                @Html.ActionLink(Html.DisplayNameFor(model => model.UserId), "Index", new { sortOrder =
+                ViewBag.BoardMemberSortParm })
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResolutionAbstract)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser!.FullName)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ResolutionId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ResolutionId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ResolutionId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

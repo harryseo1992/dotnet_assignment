@@ -1,0 +1,34 @@
+Workflow:
+
+1. The user has to first register a new account or login using one of the predefined users from the tablein the Assignment 1 instructions.
+
+    Role                Username                    Password
+    Admin               a@a.a                       P@$$w0rd
+    Board member 1      1@1.1                       P@$$w0rd
+    Board member 2      2@2.2                       P@$$w0rd
+    Board member 3      3@3.3                       P@$$w0rd
+    Board member 4      4@4.4                       P@$$w0rd
+    Board member 5      comp4976@outlook.com        P@$$w0rd
+
+    We replaced the Username and Email for Board member 5 to 'comp4976@outlook.com'. This account has been registered, but the email
+    has not been confirmed specifically for testing purposes. To use this account, the user should visit the Login page, then click
+    the 'Resend email confirmation' button. 
+
+2. Once the user is logged in, they can visit the Resolutions page, where they can draft a new resolution by clicking 'Create New'.
+    Note that the Abstract section for the resolution is a rich text editor (QuillJS).
+
+3. The table headers on the Resolutions page have clickable buttons for the Status and Board Member columns, which allow the user
+    to filter the table results by status or by name.
+
+4. When a new Resolution has been created, an email will be sent to all Board Member users. For testing purposes, we hardcoded the
+    MailService so that it sends only 1 email to 'comp4976@outlook.com'. 
+
+5. The email should contain a link that redirects the user to the Details page of the newly drafted resolution, where the user can
+    create their Feedback and choose either 'Reject' or 'Accept'.
+
+6. When the feedback is created, note that the resolution Status changes from 'Draft' to 'Accept' or 'Rejected'. If there are an even
+    number of Accepted and Rejected feedbacks, the status will be 'Incomplete'.
+
+7. If a user logs in as an admin, there will be a 'Roles' tab in the navigation bar. This page allows the admin to create new roles,
+    and set users to multiple or single roles. Note that the 'Admin' role cannot be deleted, and if a role is deleted while there are
+    users registered to that role, they will all be removed from that role.
